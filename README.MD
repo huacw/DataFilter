@@ -2,9 +2,9 @@
 
 >由于公司大部分项目都是使用mybatis，也是使用mybatis的拦截器进行分页处理，所以技术上也直接选择从拦截器入手
 
-##需求场景
+## 需求场景
 
-####第一种场景：行级数据处理
+#### 第一种场景：行级数据处理
 
 原sql：
 
@@ -36,7 +36,7 @@ select * from (select id,username,region from sys_user ) where 1=1 and region in
 ...
 ```
 
-####第二种场景：列级数据处理
+#### 第二种场景：列级数据处理
 原sql：
 
 ```
@@ -46,7 +46,7 @@ select id,username,region from sys_user ;
 * 用户A可以看到 id,username,region 
 * 用户B只能查看 id,username 的值，region的值没有权限查看。
 
-##技术实现
+## 技术实现
 
 #### mybatis拦截器
 
@@ -68,7 +68,7 @@ select id,username,region from sys_user ;
 
 这里选择StatementHandler 的 **prepare** 方法作为sql执行之前的拦截进行sql封装，使用ResultSetHandler 的 **handleResultSets** 方法作为sql执行之后的结果拦截过滤。
 
-####sql执行前
+#### sql执行前
 `PrepareInterceptor.java`
 
 ```
@@ -149,7 +149,7 @@ public class PrepareInterceptor implements Interceptor {
 }
 ```
 
-####sql执行后
+#### sql执行后
 `ResultInterceptor.java`
 
 ```
@@ -213,14 +213,14 @@ public class ResultInterceptor implements Interceptor {
 其中 `PermissionAop` 为 dao 层自定义切面，用于开关控制是否启用数据权限过滤。
 
 
-##难点
+## 难点
 
 1. 如何在拦截器获取dao层注解内容；
 2. 如何获取当前登录人标识；
 3. 如何传递动态参数；
 4. 需要考虑到与sql分页的优先级。
 
-##解答
+## 解答
 
 #### 拦截器获取dao层注解
 
@@ -258,7 +258,7 @@ com.raising.sc.permission.example.util.UserUtils.getRegionCdByUserId
 当然，现在这样只是简单的动态参数，其余的还需要后续的开发，这里只是最简单的尝试。
 
 
-##拓展
+## 拓展
 从产品的角度来说，此模块需要有三个部分组成：
 
 > 1、foruo-permission-admin  数据权限管理平台
@@ -270,17 +270,17 @@ com.raising.sc.permission.example.util.UserUtils.getRegionCdByUserId
 
 
 
-##涉及知识点:
+## 涉及知识点:
 
 * Mybatis拦截器
 * Java反射机制
 
 
-##项目源码
+## 项目源码
 
 码云：<https://gitee.com/gmarshal/foruo-sc-permission>
 
-##博客地址
+## 博客地址
 
 https://my.oschina.net/gmarshal/blog/1797026
 
