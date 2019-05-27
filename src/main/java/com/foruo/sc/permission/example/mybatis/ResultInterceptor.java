@@ -6,13 +6,13 @@ import com.foruo.sc.permission.example.util.PermissionUtils;
 import com.foruo.sc.permission.example.util.ReflectUtil;
 import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -22,10 +22,10 @@ import java.util.Properties;
  * @author GaoYuan
  * @date 2018/4/17 上午9:52
  */
-@Intercepts({
-        @Signature(type = ResultSetHandler.class, method = "handleResultSets", args={Statement.class})
-})
-@Component
+//@Intercepts({
+//        @Signature(type = ResultSetHandler.class, method = "handleResultSets", args={Statement.class})
+//})
+//@Component
 public class ResultInterceptor implements Interceptor {
     /** 日志 */
     private static final Logger log = LoggerFactory.getLogger(ResultInterceptor.class);

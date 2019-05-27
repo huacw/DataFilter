@@ -12,6 +12,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -39,6 +40,9 @@ public class PrepareInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {}
+
+    @Autowired
+    private PermissionConfig config;
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

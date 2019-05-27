@@ -15,7 +15,7 @@ public interface ExamDao {
 
     @Select("select id,username,region_cd as regionCd from sys_exam where id = #{id} ")
     @ResultType(ExamEntity.class)
-    @PermissionAop
+    @PermissionAop(field = "comId")
     ExamEntity getExam(Integer id);
 
     /**
@@ -23,7 +23,7 @@ public interface ExamDao {
      */
     @Select("select id,username,region_cd as regionCd from sys_exam where 1=1 ")
     @ResultType(ExamEntity.class)
-    @PermissionAop("测试有value")
+    @PermissionAop(value = "测试有value",field = "comId")
     List<ExamEntity> getExamList();
 
     /**

@@ -14,4 +14,7 @@ import java.lang.annotation.*;
 public @interface PermissionAop {
     String value() default "";
 
+    //过滤的字段
+    String field();
+
 }
